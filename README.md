@@ -194,7 +194,7 @@ Perform FFT-based seismic signal analysis and identify dominant frequencies and 
 
 ### Impact Analysis Dashboard
 
-![Impact Analysis](SS/impact_analysis.png.png)
+![Impact Analysis](SS/risk.png.png)
 
 Assess earthquake severity using:
 
