@@ -178,7 +178,7 @@ QuakeWatch
 
 ### Earthquake Explorer
 
-![Earthquake Explorer](SS/list_map.png)
+![Earthquake Explorer](SS/list_map.png.png)
 
 Browse historical earthquake events and visualize epicenters on an interactive map.
 
@@ -186,7 +186,7 @@ Browse historical earthquake events and visualize epicenters on an interactive m
 
 ### Seismic Frequency Analysis
 
-![Frequency Analysis](SS/f_analysis.png)
+![Frequency Analysis](SS/f_analysis.png.png)
 
 Perform FFT-based seismic signal analysis and identify dominant frequencies and energy distribution.
 
@@ -194,7 +194,7 @@ Perform FFT-based seismic signal analysis and identify dominant frequencies and 
 
 ### Impact Analysis Dashboard
 
-![Impact Analysis](SS/impact_analysis.png)
+![Impact Analysis](SS/impact_analysis.png.png)
 
 Assess earthquake severity using:
 
