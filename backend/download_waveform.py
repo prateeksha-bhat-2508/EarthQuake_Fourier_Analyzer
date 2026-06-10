@@ -1,9 +1,14 @@
 from obspy.clients.fdsn import Client
 from obspy import UTCDateTime
+import os
 
+os.makedirs(
+    "waveforms",
+    exist_ok=True
+)
 from database import earthquakes_collection
 
-client = Client("IRIS")
+client = Client("EARTHSCOPE")
 
 for quake in earthquakes_collection.find():
 

@@ -270,6 +270,39 @@ def analyze_earthquake(quake_id: str):
         ),
         2
     )
+    magnitude = float(quake["magnitude"])
+
+    affected_radius = round(
+                magnitude * 30,
+                2
+            )
+
+    if quake["tsunami"]:
+                evacuation_radius = round(
+                    affected_radius * 1.5,
+                    2
+                )
+    else:
+                evacuation_radius = round(
+                    affected_radius * 0.6,
+                    2
+                )
+
+    if magnitude >= 7:
+                risk_level = "SEVERE"
+    elif magnitude >= 6:
+                risk_level = "HIGH"
+    elif magnitude >= 5:
+                risk_level = "MODERATE"
+    else:
+                risk_level = "LOW"
+
+    affected_area_sqkm = round(
+    3.14159 *
+    affected_radius *
+    affected_radius,
+    2
+)
 
     return {
 
@@ -298,7 +331,17 @@ def analyze_earthquake(quake_id: str):
 
             "tsunami":
                 quake["tsunami"]
+
+            
+        
         },
+
+        "impact_analysis": {
+            "risk_level": risk_level,
+            "affected_radius_km": affected_radius,
+            "evacuation_radius_km": evacuation_radius,
+            "affected_area_sqkm": affected_area_sqkm
+},
 
         "signal_energy":
             round(
