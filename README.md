@@ -1,375 +1,229 @@
 # QuakeWatch
 
-QuakeWatch is a real-world seismic intelligence platform that combines earthquake event data, waveform analysis, Fourier Transform based signal processing, and interactive geospatial visualization.
+QuakeWatch is a full-stack seismic intelligence platform that combines earthquake monitoring, seismic waveform analysis, frequency-domain signal processing, and impact assessment into a unified dashboard.
 
-The application allows users to explore historical earthquake events, inspect their locations on an interactive map, analyze associated seismic waveforms, and study their frequency-domain characteristics using Fast Fourier Transform (FFT).
+The platform enables users to explore earthquake events, analyze seismic waveforms using Fast Fourier Transform (FFT), assess hazard levels, and visualize potential impact zones through interactive geospatial maps.
+
+---
+
+## Overview
+
+Earthquakes generate large volumes of seismic data that are often difficult to interpret quickly during emergency situations.
+
+QuakeWatch bridges this gap by providing:
+
+* Earthquake monitoring dashboard
+* Seismic waveform visualization
+* FFT-based frequency analysis
+* Hazard scoring system
+* Risk assessment engine
+* Impact radius estimation
+* Interactive geospatial visualization
+
+The system transforms raw seismic data into actionable insights that can support disaster response, risk assessment, and educational exploration of seismology.
 
 ---
 
 ## Features
 
-### Earthquake Event Visualization
+### Earthquake Monitoring
 
-- Displays earthquake events retrieved from MongoDB
-- Interactive map using Leaflet
-- Earthquake markers plotted using latitude and longitude
-- Event metadata display:
-  - Location
-  - Magnitude
-  - Depth
-  - Timestamp
-  - Tsunami indicator
+* Interactive earthquake explorer
+* Real-time event visualization
+* Magnitude and depth tracking
+* Epicenter mapping
+* Geographic event exploration
+* Tsunami indicator detection
 
----
+### Seismic Signal Analysis
 
-### Real Seismic Waveform Analysis
+* Waveform visualization
+* Fast Fourier Transform (FFT)
+* Dominant frequency extraction
+* Frequency spectrum analysis
+* Signal energy computation
+* Peak amplitude detection
 
-Each earthquake is associated with a MiniSEED waveform file.
+### Frequency Band Analysis
 
-For every selected earthquake:
+The platform categorizes seismic energy into:
 
-- Loads corresponding seismic waveform
-- Displays time-domain signal
-- Computes waveform statistics
-- Calculates signal energy
-- Calculates peak amplitude
+* Low Frequency (0–1 Hz)
+* Mid Frequency (1–5 Hz)
+* High Frequency (5+ Hz)
 
----
-
-### Fourier Transform Analysis
-
-Performs real FFT analysis on seismic waveforms.
-
-Analysis includes:
-
-- Frequency spectrum generation
-- Dominant frequency extraction
-- Low-frequency energy analysis
-- Mid-frequency energy analysis
-- High-frequency energy analysis
-- Hazard score estimation
-
----
+This allows rapid identification of energy distribution patterns within seismic events.
 
 ### Hazard Assessment
 
-Custom hazard score computed using:
+* Automated hazard scoring
+* Risk classification engine
+* Earthquake severity estimation
+* Signal-based risk evaluation
 
-- Earthquake magnitude
-- Peak signal amplitude
-- Signal energy
+Risk categories:
 
-Outputs:
+* LOW
+* MODERATE
+* HIGH
+* SEVERE
 
-- Hazard score
-- Frequency band distribution
-- Dominant frequencies
+### Impact Analysis
 
----
+The Impact Analysis module estimates the potential influence region of an earthquake using magnitude and event metadata.
 
-### Interactive Dashboard
+Generated metrics include:
 
-Users can:
+* Affected Radius
+* Evacuation Radius
+* Estimated Impact Area
+* Epicenter Coordinates
+* Tsunami Risk Assessment
 
-- Browse earthquake events
-- Select an earthquake
-- View event metadata
-- Inspect waveform
-- Analyze FFT spectrum
-- Compare frequency distributions
+### Geospatial Visualization
 
----
+Interactive mapping includes:
 
-## Screenshots
-
-### Earthquake Map and Event Selection
-
-![Earthquake Map](SS/list_map.png.png)
-
----
-
-### Fourier Analysis Dashboard
-
-![Fourier Analysis](SS/f_analysis.png.png)
+* Earthquake epicenter visualization
+* Impact radius overlays
+* Evacuation zone overlays
+* Geographic risk representation
+* Interactive zoom and navigation
 
 ---
 
-# System Architecture
+## System Architecture
 
 ```text
-┌───────────────────────────┐
-│       Next.js Frontend    │
-└─────────────┬─────────────┘
-              │ REST API
-              ▼
-┌───────────────────────────┐
-│       FastAPI Backend     │
-└─────────────┬─────────────┘
-              │
-    ┌─────────┴─────────┐
-    ▼                   ▼
-MongoDB           MiniSEED Files
-(Earthquakes)     (Waveforms)
-
-              │
-              ▼
-
-      Signal Processing
-
-              │
-
-              ▼
-
-          FFT Analysis
-
-              │
-
-              ▼
-
-     Interactive Dashboard
+                    ┌─────────────────────┐
+                    │  Earthquake Dataset │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │      MongoDB        │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │      FastAPI        │
+                    │   Backend Engine    │
+                    └──────────┬──────────┘
+                               │
+       ┌───────────────────────┼───────────────────────┐
+       ▼                       ▼                       ▼
+ Waveform Analysis      FFT Processing      Impact Analysis
+       │                       │                       │
+       └───────────────┬───────┴───────────────┬───────┘
+                       ▼                       ▼
+                Next.js Dashboard      Interactive Maps
 ```
 
 ---
 
-# Tech Stack
+## Technology Stack
 
-## Frontend
-
-| Technology | Purpose |
-|------------|----------|
-| Next.js | Frontend Framework |
-| React | UI Library |
-| TypeScript | Type Safety |
-| Tailwind CSS | Styling |
-| Leaflet | Interactive Maps |
-| React Leaflet | React Map Integration |
-| Plotly.js | Scientific Visualization |
-| React Plotly | Plotly React Wrapper |
+| Layer             | Technologies               |
+| ----------------- | -------------------------- |
+| Frontend          | Next.js, React, TypeScript |
+| Backend           | FastAPI, Python            |
+| Database          | MongoDB Atlas              |
+| Mapping           | Leaflet, React Leaflet     |
+| Visualization     | Plotly                     |
+| Signal Processing | NumPy, SciPy               |
+| Styling           | Tailwind CSS               |
+| Deployment        | Vercel / Render            |
 
 ---
 
-## Backend
-
-| Technology | Purpose |
-|------------|----------|
-| FastAPI | REST API |
-| Python | Core Backend |
-| NumPy | Numerical Computation |
-| SciPy | FFT and Signal Processing |
-| ObsPy | Seismic Data Handling |
-| PyMongo | MongoDB Integration |
-
----
-
-## Database
-
-| Technology | Purpose |
-|------------|----------|
-| MongoDB | Earthquake Storage |
-| MongoDB Compass | Local Database Management |
-
----
-
-## Data Sources
-
-### Earthquake Metadata
-
-Source:
-
-- USGS Earthquake Catalog
-
-Contains:
-
-- Magnitude
-- Depth
-- Latitude
-- Longitude
-- Timestamp
-- Tsunami Information
-
----
-
-### Waveform Data
-
-Source:
-
-- EarthScope / IRIS
-- ObsPy FDSN Client
-
-Format:
-
-```text
-MiniSEED (.mseed)
-```
-
----
-
-# Project Structure
+## Project Structure
 
 ```text
 QuakeWatch
 │
 ├── backend
-│   │
 │   ├── main.py
 │   ├── seismic.py
 │   ├── database.py
-│   ├── requirements.txt
-│   │
-│   ├── scripts
-│   │   └── download_waveforms.py
-│   │
-│   └── waveforms
-│       ├── quake_1.mseed
-│       ├── quake_2.mseed
-│       ├── quake_3.mseed
-│       └── ...
+│   └── requirements.txt
 │
 ├── frontend
-│   │
 │   ├── app
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── layout.tsx
+│   │   └── globals.css
 │   │
 │   ├── components
 │   │   ├── EarthquakeMap.tsx
+│   │   ├── ImpactMap.tsx
 │   │   ├── FFTChart.tsx
 │   │   └── SeismicChart.tsx
 │   │
 │   ├── lib
 │   │   └── api.ts
 │   │
-│   ├── public
-│   │
-│   ├── package.json
-│   │
-│   └── next.config.ts
+│   └── package.json
 │
-├── screenshots
+├── SS
 │   ├── list_map.png
-│   └── f_analysis.png
+│   ├── f_analysis.png
+│   └── impact_analysis.png
 │
 └── README.md
 ```
 
 ---
 
-# Database Schema
+## Screenshots
 
-```json
-{
-  "_id": "...",
-  "usgsId": "usp000jkyu",
-  "place": "Bonin Islands, Japan Region",
-  "magnitude": 6.0,
-  "depth": 487.4,
-  "latitude": 26.91,
-  "longitude": 140.05,
-  "timestamp": 1338068890120,
-  "tsunami": false,
-  "waveformFile": "waveforms/quake_1.mseed"
-}
-```
+### Earthquake Explorer
+
+![Earthquake Explorer](SS/list_map.png)
+
+Browse historical earthquake events and visualize epicenters on an interactive map.
 
 ---
 
-# API Endpoints
+### Seismic Frequency Analysis
 
-## Get Earthquakes
+![Frequency Analysis](SS/f_analysis.png)
 
-```http
-GET /earthquakes
-```
-
-Returns:
-
-```json
-[
-  {
-    "id": "...",
-    "place": "...",
-    "magnitude": 7.2
-  }
-]
-```
+Perform FFT-based seismic signal analysis and identify dominant frequencies and energy distribution.
 
 ---
 
-## Get Single Earthquake
+### Impact Analysis Dashboard
 
-```http
-GET /earthquake/{id}
-```
+![Impact Analysis](SS/impact_analysis.png)
 
----
+Assess earthquake severity using:
 
-## Analyze Earthquake
-
-```http
-GET /analyze-earthquake/{id}
-```
-
-Returns:
-
-```json
-{
-  "signal_energy": 12562,
-  "peak_amplitude": 18.4,
-  "hazard_score": 78.2,
-  "dominant_frequencies": [],
-  "frequency_bands": {},
-  "waveform": {},
-  "fft": {}
-}
-```
+* Risk classification
+* Affected radius estimation
+* Evacuation radius estimation
+* Impact area computation
+* Interactive impact visualization
 
 ---
 
-# Running Locally
+## Installation
 
-## Clone Repository
+### Clone Repository
 
 ```bash
-git clone https://github.com/<username>/QuakeWatch.git
+git clone https://github.com/your-username/QuakeWatch.git
 
 cd QuakeWatch
 ```
 
 ---
 
-# Backend Setup
-
-## Create Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-### Windows
-
-```bash
-venv\Scripts\activate
-```
-
-### Linux / Mac
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Start Backend
+## Backend Setup
 
 ```bash
 cd backend
+
+pip install -r requirements.txt
 
 uvicorn main:app --reload
 ```
@@ -377,24 +231,18 @@ uvicorn main:app --reload
 Backend:
 
 ```text
-http://127.0.0.1:8000
+http://localhost:8000
 ```
 
 ---
 
-# Frontend Setup
+## Frontend Setup
 
 ```bash
 cd frontend
 
 npm install
-```
 
----
-
-## Run Frontend
-
-```bash
 npm run dev
 ```
 
@@ -406,71 +254,49 @@ http://localhost:3000
 
 ---
 
-# FFT Analysis Workflow
+## API Endpoints
 
-```text
-Waveform File (.mseed)
-          │
-          ▼
+### Get All Earthquakes
 
-Time Domain Signal
-
-          │
-          ▼
-
-Signal Conditioning
-
-          │
-          ▼
-
-Fast Fourier Transform
-
-          │
-          ▼
-
-Frequency Spectrum
-
-          │
-          ▼
-
-Dominant Frequencies
-
-          │
-          ▼
-
-Frequency Band Analysis
-
-          │
-          ▼
-
-Hazard Assessment
+```http
+GET /earthquakes
 ```
 
----
+### Get Earthquake Details
 
-# Future Enhancements
+```http
+GET /earthquake/{quake_id}
+```
 
-- Real-time waveform retrieval from EarthScope
-- Earthquake-specific station selection
-- Machine Learning based hazard prediction
-- Seismic anomaly detection
-- Wave arrival detection using deep learning
-- Multi-station waveform comparison
-- Real-time earthquake monitoring dashboard
-- Deployment on cloud infrastructure
+### Analyze Earthquake
 
----
+```http
+GET /analyze-earthquake/{quake_id}
+```
 
-# Author
+Returns:
 
-Prateeksha Bhat
-
-Computer Science Engineering
-
-Signal Processing • Data Engineering • Earthquake Analytics
+* Waveform Data
+* FFT Spectrum
+* Frequency Bands
+* Dominant Frequencies
+* Hazard Score
+* Impact Analysis
 
 ---
 
-# License
+## Future Enhancements
 
-This project is intended for educational and research purposes.
+* Population impact estimation
+* Real-time USGS integration
+* AI-based damage prediction
+* Emergency alert system
+* Infrastructure vulnerability analysis
+* Historical trend forecasting
+
+---
+
+
+## License
+
+This project is intended for academic, educational, and research purposes.
