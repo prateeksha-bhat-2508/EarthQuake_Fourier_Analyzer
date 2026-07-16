@@ -295,8 +295,3 @@ Returns:
 * Historical trend forecasting
 
 ---
-
-
-## License
-
-This project is intended for academic, educational, and research purposes.
